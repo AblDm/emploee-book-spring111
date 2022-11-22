@@ -8,6 +8,15 @@ Content-Type: application/json
   "lastName": "Test1",
   "department": 1,
   "salary": 1000}
+
+### Создать сотрудника 2
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{"firstName": "Test2",
+  "lastName": "Test2",
+  "department": 1,
+  "salary": 5000}
 ### Получение суммы зарплат сотрудников
 GET http://localhost:8080/employee/salary/sum
 
