@@ -2,6 +2,7 @@ package com.skypro.employee.service;
 
 import com.skypro.employee.model.Employee;
 import com.skypro.employee.record.EmployeeRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -20,8 +21,9 @@ public class EmployeeService {
         if (employeeRequest.getLastName () == null || employeeRequest.getFirstName () == null){
             throw new IllegalArgumentException ("Employee name could be fill");
         }
-        Employee employee = new Employee (employeeRequest.getFirstName (),
-                employeeRequest.getLastName (),
+        Employee employee = new Employee (
+                StringUtils.capitalize(employeeRequest.getFirstName ()),
+                StringUtils.capitalize(employeeRequest.getLastName ()),
                 employeeRequest.getDepartment (),
                 employeeRequest.getSalary ());
 
@@ -66,18 +68,17 @@ public class EmployeeService {
         int sum1 = 0;
         for (int i = 0; i < employees.size (); i++) {
             sum1 = sum1 + employees.get (i).getSalary ();
-        }
-        int overageSalary = (sum1 / employees.size ());
-
+        }   int overageSalary = (sum1 / employees.size ());
         List<Employee> result = new LinkedList<> ();
-        for (int i = 0; i < employees.size (); i++) {
-            {
-                if (employees.get (i).getSalary () > overageSalary) {
-                    System.out.println (employees.get (i));
-                    result.add (employees.get (i));
+        for (int i = 0; i < employees.size (); i++) {{
+            if (employees.get (i).getSalary () > overageSalary)
+            {System.out.println (employees.get (i));
+                result.add (employees.get (i));
 
-                }
+
             }
-        }return result;
+
+        }
+    } return result;
     }
 }
