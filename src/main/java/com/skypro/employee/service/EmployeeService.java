@@ -3,7 +3,7 @@ package com.skypro.employee.service;
 import com.skypro.employee.model.Employee;
 import com.skypro.employee.record.EmployeeRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -20,10 +20,11 @@ public class EmployeeService {
         if (employeeRequest.getLastName () == null || employeeRequest.getFirstName () == null){
             throw new IllegalArgumentException ("Employee name could be fill");
         }
-        Employee employee = new Employee (employeeRequest.getFirstName (),
-                employeeRequest.getLastName (),
+        Employee employee = new Employee (
+                StringUtils.capitalize(employeeRequest.getFirstName ()),
+                StringUtils.capitalize(employeeRequest.getLastName ()),
                 employeeRequest.getDepartment (),
-                employeeRequest.getSalary ());
+                employeeRequest.getSalary (), 1);
 
         this.employees.put (employee.getId (), employee);
         return employee;
@@ -35,7 +36,6 @@ public class EmployeeService {
                 .sum ();
     }
 
-    @GetMapping("/employee/salary/min")
     public Object getMinimalSalary () {
         Employee result = employees.get (0);
         int maxSallary = Integer.MIN_VALUE;
@@ -51,6 +51,7 @@ public class EmployeeService {
     public Object getMaximalSalary (){
         Employee result = employees.get (0);
         int minSallary = Integer.MAX_VALUE;
+
         for (int i = 0; i < employees.size () - 1; i++) {
             if (employees.get (i).getSalary () < minSallary) {
                 minSallary = employees.get (i).getSalary ();
@@ -66,18 +67,16 @@ public class EmployeeService {
         int sum1 = 0;
         for (int i = 0; i < employees.size (); i++) {
             sum1 = sum1 + employees.get (i).getSalary ();
-        }
-        int overageSalary = (sum1 / employees.size ());
+        }   int overageSalary = (sum1 / employees.size ());
 
         List<Employee> result = new LinkedList<> ();
-        for (int i = 0; i < employees.size (); i++) {
-            {
-                if (employees.get (i).getSalary () > overageSalary) {
-                    System.out.println (employees.get (i));
-                    result.add (employees.get (i));
-
-                }
+        for (int i = 0; i < employees.size (); i++) {{
+            if (employees.get (i).getSalary () > overageSalary)
+            {System.out.println (employees.get (i));
+                result.add (employees.get (i));
             }
-        }return result;
+
+        }
+        } return result;
     }
 }
