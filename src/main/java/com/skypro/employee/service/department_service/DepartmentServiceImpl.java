@@ -3,7 +3,6 @@ package com.skypro.employee.service.department_service;
 
 import com.skypro.employee.model.Employee;
 import com.skypro.employee.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public
 class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentService {
     private final EmployeeRepository employeeRepository;
 
-    @Autowired
+
     DepartmentServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
@@ -24,7 +23,7 @@ class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentSer
 
     @Override
      public Set<Integer> getExistingDepartments() {
-         return employeeRepository.getEmployees ().stream ()
+         return employeeRepository.getEmployeeArrayList ().stream ()
                  .map (Employee::getDepartmentId)
                  .collect(Collectors.toSet());
      }
@@ -37,7 +36,7 @@ class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentSer
 
      @Override
      public List<Employee> getEmployeeFromDepartment(int department) {
-         return employeeRepository.getEmployees ().stream ()
+         return employeeRepository.getEmployeeArrayList ().stream ()
                  .filter (employee -> employee.getDepartmentId () == department)
                  .collect(Collectors.toList ()) ;
      }

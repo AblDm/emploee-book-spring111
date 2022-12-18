@@ -3,24 +3,25 @@ package com.skypro.employee.repositories;
 import com.skypro.employee.model.Employee;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.ArrayList;
+
 @Component
 public class EmployeeRepository {
     private static int lostId;
 
-    private final List <Employee> employees;
+    public ArrayList<Employee> employeeArrayList;
 
-    public EmployeeRepository(List<Employee> employees) {
-        this.employees = employees;
+    public EmployeeRepository(ArrayList<Employee> employees) {
+        this.employeeArrayList = employees;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public ArrayList<Employee> getEmployeeArrayList() {
+        return employeeArrayList;
     }
 
     public void addEmployee (Employee employee){
-        employees.add (employee);
-        ++lostId;
+       this.employeeArrayList.add (employee);
+
     }
 
     public static int getLostId() {

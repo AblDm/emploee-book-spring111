@@ -17,7 +17,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @ExtendWith (MockitoExtension.class)
 public class DepartmentServiceImplTest {
@@ -31,13 +30,13 @@ public class DepartmentServiceImplTest {
 
     @BeforeEach
     public void setUp(){
-        Employee employee1 = new Employee ("Ivan","Ivanov", 20_000, 1, 1);
-        Employee employee2 = new Employee ("Petr","Ivanov", 30_000, 3, 2);
-        Employee employee3 = new Employee ("Ivan","Petrov", 50_000, 2, 3);
+        Employee employee1 = new Employee ("Ivan","Ivanov", 20_000, 1);
+        Employee employee2 = new Employee ("Petr","Ivanov", 30_000, 3);
+        Employee employee3 = new Employee ("Ivan","Petrov", 50_000, 2);
 
         actualEmployee = new ArrayList<> (List.of (employee1, employee2, employee3));
 
-        when(employeeRepository.getEmployees ()).thenReturn (actualEmployee);
+
     }
 
 
@@ -78,8 +77,7 @@ public class DepartmentServiceImplTest {
         assertEquals (expected, actual);
     }
 
-    @Test //getMaximalSalaryOfDepartment - надо переписать чтобы не сумму возвращала
-    // а сотрудника как по заданию тут и в depServ
+    @Test
     public void shouldMaximalSalaryOfDepartment () {
         final int department =1;
 
@@ -92,8 +90,7 @@ public class DepartmentServiceImplTest {
         assertEquals (expected, actual);
     }
 
-    @Test //getMinimalSalaryOfDepartment - надо переписать чтобы не сумму возвращала
-    // а сотрудника, как по заданию тут и в depServ
+    @Test
     public void shouldMinimalSalaryOfDepartment () {
         final int department =1;
 
