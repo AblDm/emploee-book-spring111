@@ -11,19 +11,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public
-class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentService {
+public class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentService {
     private final EmployeeRepository employeeRepository;
 
-
-    DepartmentServiceImpl(EmployeeRepository employeeRepository) {
+    public DepartmentServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
 
     @Override
      public Set<Integer> getExistingDepartments() {
-         return employeeRepository.getEmployeeArrayList ().stream ()
+         return employeeRepository.getEmployeeList ().stream ()
                  .map (Employee::getDepartmentId)
                  .collect(Collectors.toSet());
      }
@@ -36,7 +34,7 @@ class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentSer
 
      @Override
      public List<Employee> getEmployeeFromDepartment(int department) {
-         return employeeRepository.getEmployeeArrayList ().stream ()
+         return employeeRepository.getEmployeeList ().stream ()
                  .filter (employee -> employee.getDepartmentId () == department)
                  .collect(Collectors.toList ()) ;
      }
@@ -55,10 +53,11 @@ class DepartmentServiceImpl implements com.skypro.employee.service.DepartmentSer
                  .min ().orElse (0);
      }
 
-     @Override
-     public int getMaximalSalaryOfDepartment(int department) {
-         return getEmployeeFromDepartment (department).stream ()
-                 .mapToInt (Employee :: getSalary)
-                 .max ().orElse (0);
-     }
+    @Override
+    public int getMaximalSalaryOfDepartment(int department) {
+
+        return getEmployeeFromDepartment (department).stream ()
+                .mapToInt (Employee::getSalary)
+                .max ().orElse (0);
+    }
  }

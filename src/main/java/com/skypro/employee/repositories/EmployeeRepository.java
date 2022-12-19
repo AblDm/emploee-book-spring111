@@ -1,30 +1,26 @@
 package com.skypro.employee.repositories;
 
 import com.skypro.employee.model.Employee;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
-@Component
+@Repository
 public class EmployeeRepository {
-    private static int lostId;
 
-    public ArrayList<Employee> employeeArrayList;
+    public final ArrayList<Employee> employeeList;
 
-    public EmployeeRepository(ArrayList<Employee> employees) {
-        this.employeeArrayList = employees;
+    public EmployeeRepository() {
+        this.employeeList = new ArrayList<> ();
     }
 
-    public ArrayList<Employee> getEmployeeArrayList() {
-        return employeeArrayList;
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void addEmployee (Employee employee){
-       this.employeeArrayList.add (employee);
-
+    public void addEmployee(Employee newEmployee) {
+        this.employeeList.add (newEmployee);
     }
 
-    public static int getLostId() {
-        return lostId;
-    }
+
 }

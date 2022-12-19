@@ -35,20 +35,18 @@ public class DepartmentServiceImplTest {
         Employee employee3 = new Employee ("Ivan","Petrov", 50_000, 2);
 
         actualEmployee = new ArrayList<> (List.of (employee1, employee2, employee3));
-
-
     }
 
 
     @Test
     //getExistingDep
-    public void shouldReturnExistDepartments () {
-        final Set <Integer> actual =actualEmployee.stream ()
+    public void shouldReturnExistDepartments() {
+        final Set<Integer> actual = actualEmployee.stream ()
                 .map (Employee::getDepartmentId)
-                .collect(Collectors.toSet());
+                .collect (Collectors.toSet ());
         final Set<Integer> expected = departmentService.getExistingDepartments ();
 
-        assertEquals(expected, actual);
+        assertEquals (expected, actual);
     }
 
      @Test
@@ -65,7 +63,7 @@ public class DepartmentServiceImplTest {
     }
 
     @Test //getSalarySumOfDepartment
-    public void shouldReturnSalarySumOfDepartment () {
+    public void shouldReturnSalarySumOfDepartment() {
         final int department = 1;
 
         final int actual = actualEmployee.stream ()
@@ -78,27 +76,28 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    public void shouldMaximalSalaryOfDepartment () {
-        final int department =1;
+    public void shouldMaximalSalaryOfDepartment() {
+        final int department = 1;
 
         final int actual = actualEmployee.stream ()
                 .filter (e -> e.getDepartmentId () == department)
-                .mapToInt (Employee :: getSalary)
-                .max ().orElse(0);
-        final  int expected = departmentService.getMaximalSalaryOfDepartment (department);
+                .mapToInt (Employee::getSalary)
+                .max ().orElse (0);
+
+        final int expected = departmentService.getMaximalSalaryOfDepartment (department);
 
         assertEquals (expected, actual);
     }
 
     @Test
-    public void shouldMinimalSalaryOfDepartment () {
-        final int department =1;
+    public void shouldMinimalSalaryOfDepartment() {
+        final int department = 1;
 
         final int actual = actualEmployee.stream ()
                 .filter (e -> e.getDepartmentId () == department)
-                .mapToInt (Employee :: getSalary)
-                .max ().orElse(0);
-        final  int expected = departmentService.getMinimalSalaryOfDepartment (department);
+                .mapToInt (Employee::getSalary)
+                .max ().orElse (0);
+        final int expected = departmentService.getMinimalSalaryOfDepartment (department);
 
         assertEquals (expected, actual);
     }
