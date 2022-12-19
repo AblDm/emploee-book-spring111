@@ -67,8 +67,8 @@ public class EmployeeService {
         for (int i = 0; i < employeeRepository.employeeList.size (); i++) {
             {
                 if (employeeRepository.employeeList.get (i).getSalary () > overageSalary) {
-                    System.out.println (employeeRepository.employeeList.get (i));
-                    result.add (employeeRepository.employeeList.get (i));
+
+                    result.add (result.get (i));
                 }
 
             }
