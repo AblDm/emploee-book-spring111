@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EmployeeServiceTest {
     @InjectMocks
     private EmployeeRepository employeeRepository;
-    @InjectMocks
+    @Mock
     private EmployeeService employeeService;
 
     private List<Employee> actualEmployee;
@@ -84,9 +85,9 @@ public class EmployeeServiceTest {
         }
         int overageSalary = (sum1 / actualEmployee.size ());
         final List<Employee> actual = new LinkedList<> ();
-        for (Employee employee : actual) {
-            if (employee.getSalary () > overageSalary) {
-                actual.add (employee);
+        for (Employee employee1 : actual) {
+            if (employee1.getSalary () >= overageSalary) {
+                actual.add (employee1);
             }
         }
 
