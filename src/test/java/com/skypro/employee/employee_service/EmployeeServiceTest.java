@@ -85,8 +85,8 @@ public class EmployeeServiceTest {
         }
         int overageSalary = (sum1 / actualEmployee.size ());
         final List<Employee> actual = new LinkedList<> ();
-        for (Employee employee1 : actual) {
-            if (employee1.getSalary () >= overageSalary) {
+        for (Employee employee1 : actualEmployee) {
+            if (employee1.getSalary () > overageSalary) {
                 actual.add (employee1);
             }
         }
