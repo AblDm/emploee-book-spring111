@@ -28,7 +28,7 @@ public class DepartmentController {
     }
 
 
-    @GetMapping("employees/")
+    @GetMapping("/employees")
     public Map <Integer, List<Employee>> getEmployeeByDepartment (){
         return departmentService.getEmployeeByDepartment();
     }
