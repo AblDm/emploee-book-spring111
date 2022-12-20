@@ -43,14 +43,14 @@ public class EmployeeServiceTest {
 
     @Test
     public void shouldMinSallary() {
-        final int actual = employeeService.getMinimalSalary ();
-        assertEquals (MIN, actual);
+        final int expected = employeeService.getMinimalSalary ();
+        assertEquals (MIN, expected);
     }
 
     @Test
     public void shouldMaxSallary() {
-    final int actual = employeeService.getMaximalSalary ();
-    assertEquals (MAX, actual);
+    final int expected = employeeService.getMaximalSalary ();
+    assertEquals (MAX, expected);
      }
 
     @Test
