@@ -31,33 +31,33 @@ public class EmployeeServiceTest {
     @Test
     public void getAllEmployees() {
         final List<Employee> expected = employeeService.getAllEmployees ();
-        assertEquals (listEmployee (),expected);
+        assertEquals (expected,listEmployee ());
 
     }
 
     @Test
     public void shouldSallarySum() {
         final int expected = employeeService.getSallarySum ();
-        assertEquals (TOTAL_SUM, expected);
+        assertEquals (expected, TOTAL_SUM);
     }
 
     @Test
     public void shouldMinSallary() {
         final int expected = employeeService.getMinimalSalary ();
-        assertEquals (MIN, expected);
+        assertEquals (expected, MIN);
     }
 
     @Test
     public void shouldMaxSallary() {
     final int expected = employeeService.getMaximalSalary ();
-    assertEquals (MAX,expected);
+    assertEquals (expected,MAX);
      }
 
     @Test
     public void shouldHighSalary() {
 
         final List<Employee> expected = employeeService.getHighSalary ();
-        assertEquals (listEmployeeMoreAvg (),expected);
+        assertEquals (expected,listEmployeeMoreAvg ());
     }
 }
 
