@@ -10,13 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.skypro.employee.EmployeeFabric.listEmployee;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith (MockitoExtension.class)
 public class DepartmentServiceImplTest {
@@ -26,22 +27,16 @@ public class DepartmentServiceImplTest {
     @InjectMocks
     private DepartmentServiceImpl departmentService;
 
-    private List <Employee> actualEmployee;
-
     @BeforeEach
     public void setUp(){
-        Employee employee1 = new Employee ("Ivan","Ivanov", 20_000, 1);
-        Employee employee2 = new Employee ("Petr","Ivanov", 30_000, 3);
-        Employee employee3 = new Employee ("Ivan","Petrov", 50_000, 2);
-
-        actualEmployee = new ArrayList<> (List.of (employee1, employee2, employee3));
+        when(employeeRepository.getEmployeeList ()).thenReturn (listEmployee ());
     }
 
 
     @Test
     //getExistingDep
     public void shouldReturnExistDepartments() {
-        final Set<Integer> actual = actualEmployee.stream ()
+        final Set<Integer> actual = listEmployee ().stream ()
                 .map (Employee::getDepartmentId)
                 .collect (Collectors.toSet ());
         final Set<Integer> expected = departmentService.getExistingDepartments ();
@@ -54,7 +49,7 @@ public class DepartmentServiceImplTest {
     public void shouldReturnEmployeesFromDepartment() {
         final int department = 1;
 
-        final List <Employee>actual = actualEmployee.stream ()
+        final List <Employee>actual = listEmployee ().stream ()
                 .filter (e -> e.getDepartmentId () == department)
                 .toList ();
         final List <Employee> expected = departmentService.getEmployeeFromDepartment (department);
@@ -66,7 +61,7 @@ public class DepartmentServiceImplTest {
     public void shouldReturnSalarySumOfDepartment() {
         final int department = 1;
 
-        final int actual = actualEmployee.stream ()
+        final int actual = listEmployee ().stream ()
                 .filter (e -> e.getDepartmentId () == department)
                 .mapToInt (Employee::getSalary)
                 .sum ();
@@ -79,7 +74,7 @@ public class DepartmentServiceImplTest {
     public void shouldMaximalSalaryOfDepartment() {
         final int department = 1;
 
-        final int actual = actualEmployee.stream ()
+        final int actual = listEmployee ().stream ()
                 .filter (e -> e.getDepartmentId () == department)
                 .mapToInt (Employee::getSalary)
                 .max ().orElse (0);
@@ -93,7 +88,7 @@ public class DepartmentServiceImplTest {
     public void shouldMinimalSalaryOfDepartment() {
         final int department = 1;
 
-        final int actual = actualEmployee.stream ()
+        final int actual = listEmployee ().stream ()
                 .filter (e -> e.getDepartmentId () == department)
                 .mapToInt (Employee::getSalary)
                 .max ().orElse (0);
@@ -104,9 +99,9 @@ public class DepartmentServiceImplTest {
     @Test
     public void shouldEmployeeByDepartment(){
         final Map<Integer, List <Employee>> actual=
-                actualEmployee.stream ().map(Employee::getDepartmentId).collect(Collectors.toSet()).stream ()
+                listEmployee ().stream ().map(Employee::getDepartmentId).collect(Collectors.toSet()).stream ()
                         .collect(Collectors.toMap (dept->dept,
-                                dept -> actualEmployee.stream ().filter ( e ->e.getDepartmentId () == dept)
+                                dept -> listEmployee ().stream ().filter ( e ->e.getDepartmentId () == dept)
                                         .collect(Collectors.toList ())));
         final  Map<Integer, List <Employee>> expected = departmentService.getEmployeeByDepartment ();
 

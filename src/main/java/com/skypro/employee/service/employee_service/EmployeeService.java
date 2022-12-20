@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -18,7 +19,7 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public ArrayList <Employee> getAllEmployees(){
+    public List <Employee> getAllEmployees(){
         return employeeRepository.getEmployeeList ();
     }
 
@@ -36,13 +37,13 @@ public class EmployeeService {
     }
 
     public int getSallarySum() {
-        return employeeRepository.employeeList.stream ()
+        return employeeRepository.getEmployeeList ().stream ()
                 .mapToInt (Employee::getSalary)
                 .sum ();
     }
 
     public int getMinimalSalary() {
-        return employeeRepository.employeeList.stream ()
+        return employeeRepository.getEmployeeList ().stream ()
                 .mapToInt (Employee::getSalary)
                 .min ().orElse (0);
 
@@ -50,29 +51,17 @@ public class EmployeeService {
 
     public int getMaximalSalary() {
 
-        return employeeRepository.employeeList.stream ()
+        return employeeRepository.getEmployeeList ().stream ()
                 .mapToInt (Employee :: getSalary)
                 .max ().orElse (0);
     }
 
 
     public List<Employee> getHighSalary() {
-        int sum1 = 0;
-        for (int i = 0; i < employeeRepository.employeeList.size (); i++) {
-            sum1 = sum1 + employeeRepository.employeeList.get (i).getSalary ();
-        }
-        int overageSalary = (sum1 / employeeRepository.getEmployeeList ().size ());
-
-        List<Employee> result = new LinkedList<> ();
-        for (int i = 0; i < employeeRepository.employeeList.size (); i++) {
-            {
-                if (employeeRepository.employeeList.get (i).getSalary () > overageSalary) {
-
-                    result.add (result.get (i));
-                }
-
-            }
-        }
-        return result;
+        List<Employee> employeeList = employeeRepository.getEmployeeList ();
+        double overageSalary = employeeList.stream ().mapToInt (Employee::getSalary).average ().orElse (0);
+        return employeeList.stream ()
+                .filter (employee -> employee.getSalary () > overageSalary)
+                .collect(Collectors.toList());
     }
 }

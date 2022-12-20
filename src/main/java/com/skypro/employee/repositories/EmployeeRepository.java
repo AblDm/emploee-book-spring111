@@ -4,22 +4,19 @@ import com.skypro.employee.model.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class EmployeeRepository {
 
-    public final ArrayList<Employee> employeeList;
+    private final List<Employee> employeeList = new ArrayList<> ();
 
-    public EmployeeRepository() {
-        this.employeeList = new ArrayList<> ();
-    }
-
-    public ArrayList<Employee> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         return employeeList;
     }
 
     public void addEmployee(Employee newEmployee) {
-        this.employeeList.add (newEmployee);
+        employeeList.add (newEmployee);
     }
 
 
