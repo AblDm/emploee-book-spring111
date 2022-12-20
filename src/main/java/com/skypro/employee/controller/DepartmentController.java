@@ -29,17 +29,17 @@ public class DepartmentController {
 
 
     @GetMapping("/employees")
-    public Map <Integer, List<Employee>> getEmployeeByDepartment (){
+    public Map <Integer, List<Employee>> getEmployeeByDepartment(){
         return departmentService.getEmployeeByDepartment();
     }
 
     @GetMapping("/{id}/employees/")
-    public Collection <Employee> getEmployeeFromDepartment (@PathVariable ("id") int departmentId){
+    public Collection <Employee> getEmployeeFromDepartment(@PathVariable ("id") int departmentId){
         return departmentService.getEmployeeFromDepartment (departmentId);
     }
 
     @GetMapping("/{id}/salary/sum")
-    public int getSalarySumOfDepartment (@PathVariable ("id") int departmentId){
+    public int getSalarySumOfDepartment(@PathVariable ("id") int departmentId){
         return departmentService.getSalarySumOfDepartment(departmentId);
     }
 
