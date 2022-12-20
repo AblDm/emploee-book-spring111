@@ -30,7 +30,7 @@ public class Employee {
         return lastName;
     }
 
-    public int getDepartment() {
+    public int getDepartmentId() {
         return department;
     }
 

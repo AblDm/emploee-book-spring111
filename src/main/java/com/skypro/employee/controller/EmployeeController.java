@@ -2,14 +2,13 @@ package com.skypro.employee.controller;
 
 import com.skypro.employee.model.Employee;
 import com.skypro.employee.record.EmployeeRequest;
-import com.skypro.employee.service.EmployeeService;
+import com.skypro.employee.service.employee_service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-
 
 
 /**
@@ -23,36 +22,40 @@ import java.util.Collection;
 @RestController
 public class EmployeeController {
     private final EmployeeService employeeService;
-    public EmployeeController (EmployeeService employeeService){
+
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
     @GetMapping("/employees")
-    public Collection<Employee> getAllEmployees(){
-      return this.employeeService.getAllEmployees ();
+    public Collection<Employee> getAllEmployees() {
+        return this.employeeService.getAllEmployees ();
     }
 
     @PostMapping("/employees")
-    public Employee createEmployee (@RequestBody EmployeeRequest employeeRequest) {
+    public Employee createEmployee(@RequestBody EmployeeRequest employeeRequest) {
         return this.employeeService.addEmployee (employeeRequest);
     }
 
     @GetMapping("/employee/salary/sum")
-    public int getSallarySum () {
-        return this.employeeService.getSallarySum();
+    public int getSallarySum() {
+        return this.employeeService.getSallarySum ();
     }
+
     @GetMapping("/employee/salary/min")
-    public Object getMinimalSalary () {
+    public Object getMinimalSalary() {
         return this.employeeService.getMinimalSalary ();
     }
+
     @GetMapping("/employee/salary/max")
-    public Object getMaximalSalary () {
+    public Object getMaximalSalary() {
         return this.employeeService.getMaximalSalary ();
     }
 
 
-   @GetMapping("/employee/high-salary")
-   public Object getHighSalary () {
-   return this.employeeService.getHighSalary ();
-   }
+    @GetMapping("/employee/high-salary")
+    public Object getHighSalary() {
+        return this.employeeService.getHighSalary ();
+    }
 
 }
