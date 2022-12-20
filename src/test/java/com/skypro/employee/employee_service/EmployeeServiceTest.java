@@ -30,15 +30,15 @@ public class EmployeeServiceTest {
 
     @Test
     public void getAllEmployees() {
-        final List<Employee> actual = employeeService.getAllEmployees ();
-        assertEquals (listEmployee (), actual);
+        final List<Employee> expected = employeeService.getAllEmployees ();
+        assertEquals (listEmployee (),expected);
 
     }
 
     @Test
     public void shouldSallarySum() {
-        final int actual = employeeService.getSallarySum ();
-        assertEquals (TOTAL_SUM, actual);
+        final int expected = employeeService.getSallarySum ();
+        assertEquals (TOTAL_SUM, expected);
     }
 
     @Test
@@ -50,14 +50,14 @@ public class EmployeeServiceTest {
     @Test
     public void shouldMaxSallary() {
     final int expected = employeeService.getMaximalSalary ();
-    assertEquals (MAX, expected);
+    assertEquals (MAX,expected);
      }
 
     @Test
     public void shouldHighSalary() {
 
         final List<Employee> expected = employeeService.getHighSalary ();
-        assertEquals (expected, listEmployeeMoreAvg ());
+        assertEquals (listEmployeeMoreAvg (),expected);
     }
 }
 
